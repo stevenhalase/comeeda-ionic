@@ -1,0 +1,21 @@
+user-statistics {
+  ion-grid {
+    text-align: center;
+
+    ion-col:nth-child(1) {
+      h1 {
+        color: #3498db;
+      }
+    }
+    ion-col:nth-child(2) {
+      h1 {
+        color: #2ecc71;
+      }
+    }
+    ion-col:nth-child(3) {
+      h1 {
+        color: #e74c3c;
+      }
+    }
+  }
+}

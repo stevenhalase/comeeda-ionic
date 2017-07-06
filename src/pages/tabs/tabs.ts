@@ -1,19 +1,29 @@
 import { Component } from '@angular/core';
+import { Events } from 'ionic-angular';
 
-import { AboutPage } from '../about/about';
-import { ContactPage } from '../contact/contact';
-import { HomePage } from '../home/home';
+import { DashboardPage } from '../dashboard/dashboard';
+import { ServicePage } from '../service/service';
+import { SettingsPage } from '../settings/settings';
+import { AuthProvider } from '../../providers/auth/auth';
 
 @Component({
   templateUrl: 'tabs.html'
 })
 export class TabsPage {
 
-  tab1Root = HomePage;
-  tab2Root = AboutPage;
-  tab3Root = ContactPage;
+  tabs: Array<any> = [];
 
-  constructor() {
+  constructor(
+    public events: Events,
+    public authProvider: AuthProvider) {
+      this.tabs = [
+        { title: "Dashboard", root: DashboardPage, icon: "home" },
+        { title: "Service", root: ServicePage, icon: "navigate" },
+        { title: "Settings", root: SettingsPage, icon: "cog" },
+      ];
+  }
 
+  handleUserLogin(userData) {
+    
   }
 }

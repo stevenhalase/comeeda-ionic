@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Service
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-toolbar *ngIf="authProvider.currentUser.membertype[0] === 'volunteer' && activePickup">
+    <p>Navigating to Pickup</p>
+    <ion-buttons end>
+      <button ion-button (click)="cancelPickup()" color="danger">Cancel</button>
+    </ion-buttons>
+    <ion-buttons end>
+      <button ion-button (click)="completePickup()" color="secondary">Complete</button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-item *ngIf="authProvider.currentUser.membertype[0] === 'volunteer' && !activePickup">
+    <ion-label>Online</ion-label>
+    <ion-toggle [(ngModel)]="online" (ionChange)="changeOnline()"></ion-toggle>
+  </ion-item>
+  <button ion-button full (click)="requestPickup()" *ngIf="authProvider.currentUser.membertype[0] === 'donator'">Donate Now</button>
+  <div *ngIf="!online && authProvider.currentUser.membertype[0] === 'volunteer'" id="offline-indicator">
+    <ion-icon name="warning"></ion-icon>
+    Offline
+  </div>
+  <div #map id="map" style="height:92%;" [ngClass]="{'online': online || authProvider.currentUser.membertype[0] !== 'volunteer'}"></div>
+</ion-content>

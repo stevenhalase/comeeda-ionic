@@ -1,0 +1,24 @@
+user-hero {
+  ion-item {
+    border-top: 0 !important;
+    border-bottom: 0 !important;
+
+    h2 {
+      text-align: center;
+    }
+
+    p {
+      text-align: center;
+    }
+
+    ion-avatar {
+      margin-bottom: 15px;
+
+      img {
+        width: 100px !important;
+        height: 100px !important;
+        margin: 0 auto !important;
+      }
+    }
+  }
+}

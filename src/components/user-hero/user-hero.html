@@ -1,0 +1,9 @@
+<ion-list>
+  <ion-item>
+    <ion-avatar>
+      <img src="http://www.lovemarks.com/wp-content/uploads/profile-avatars/default-avatar-tech-guy.png">
+    </ion-avatar>
+    <h2>{{authProvider.currentUser ? authProvider.currentUser.firstname : ''}} {{authProvider.currentUser ? authProvider.currentUser.lastname : ''}}</h2>
+    <p>{{authProvider.currentUser ? authProvider.currentUser.city : ''}}, {{authProvider.currentUser ? authProvider.currentUser.state : ''}}</p>
+  </ion-item>
+</ion-list>

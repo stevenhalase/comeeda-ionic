@@ -1,0 +1,17 @@
+page-service {
+  #map {
+    opacity: 0.5;
+  }
+
+  .online {
+    opacity: 1 !important;
+  }
+
+  #offline-indicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 2.5rem;
+  }
+}
