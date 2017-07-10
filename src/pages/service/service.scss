@@ -1,6 +1,17 @@
 page-service {
+
+  ion-item {
+    background-color: #344E5D !important;
+    color: #FFF !important;
+
+    .item-inner {
+      border: 0 !important;
+    }
+  }
+
   #map {
     opacity: 0.5;
+    height:94%
   }
 
   .online {

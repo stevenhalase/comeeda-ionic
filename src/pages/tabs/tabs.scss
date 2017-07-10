@@ -1,0 +1,22 @@
+page-tabs {
+  .tabbar {
+    background-color: #1E3B4B !important;
+
+    .tab-button {
+      padding: 15px 0!important;
+      color: #4f7387 !important;
+
+      .tab-button-icon {
+        color: #4f7387 !important;
+      }
+    }
+
+    .tab-button[aria-selected=true] {
+      color: #FFF !important;
+
+      .tab-button-icon {
+        color: #FFF !important;
+      }
+    }
+  }
+}

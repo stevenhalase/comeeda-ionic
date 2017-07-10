@@ -1,3 +1,14 @@
 page-settings {
+  button {
+    background-color: #344E5D !important;
+    color: #FFF !important;
 
+    .item-inner {
+      border-color: #1B3542 !important;
+    }
+  }
+
+  button {
+    border: 0 !important;
+  }
 }

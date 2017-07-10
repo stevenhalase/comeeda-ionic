@@ -19,7 +19,7 @@ export class SettingsPage {
   }
 
   openProfileEdit() {
-    let profileEditModal = this.modalCtrl.create(ProfileEditPage, null, { enableBackdropDismiss: false });
+    let profileEditModal = this.modalCtrl.create(ProfileEditPage, null, { enableBackdropDismiss: true });
     profileEditModal.present();
   }
 

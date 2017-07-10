@@ -1,3 +1,51 @@
 page-auth {
+  ion-content {
 
+    ion-item {
+      background: transparent !important;
+      color: #FFF !important;
+      padding-left: 0 !important;
+
+      ion-label {
+        color: #FFF !important;
+      }
+
+      .item-inner {
+        border-color: #FFF !important;
+      }
+    }
+
+    ion-segment-button {
+      color: #FFF !important;
+      border-color: #FFF !important;
+      .segment-button.segment-activated {
+        border-color: #FFF !important;
+        color: #FFF !important;
+      }
+    }
+
+    .segment-button.segment-activated {
+      background-color: #344E5D !important;
+    }
+
+    button.button-full {
+      margin-top: 20px !important;
+      background-color: #FFF !important;
+      color: #344E5D !important;
+    }
+
+    button.button-small {
+      color: #FFF !important;
+    }
+
+    .item-select {
+      margin-top: 20px !important;
+
+      ion-select {
+        .select-icon-inner {
+          color: #FFF !important;
+        }
+      }
+    }
+  }
 }

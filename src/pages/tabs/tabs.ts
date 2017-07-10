@@ -7,6 +7,7 @@ import { SettingsPage } from '../settings/settings';
 import { AuthProvider } from '../../providers/auth/auth';
 
 @Component({
+  selector: 'page-tabs',
   templateUrl: 'tabs.html'
 })
 export class TabsPage {

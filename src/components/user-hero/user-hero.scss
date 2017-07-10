@@ -1,24 +1,32 @@
 user-hero {
-  ion-item {
-    border-top: 0 !important;
-    border-bottom: 0 !important;
 
-    h2 {
-      text-align: center;
-    }
-
-    p {
-      text-align: center;
-    }
-
-    ion-avatar {
-      margin-bottom: 15px;
-
-      img {
-        width: 100px !important;
-        height: 100px !important;
-        margin: 0 auto !important;
+  .card-background-page {
+    position: relative;
+    text-align: center;
+    
+    .card-img-container {
+        max-height: 18em;
+        overflow: hidden;
       }
-    }
+
+      .card-title-container {
+        padding: 10px;
+        background-color: #344E5D !important;
+      }
+
+      .card-title {
+        position: relative;
+        font-size: 2.0em;
+        width: 100%;
+        font-weight: bold;
+        color: #fff;
+      }
+
+      .card-subtitle {
+        font-size: 1.0em;
+        position: relative;
+        width: 100%;
+        color: #fff;
+      }
   }
 }

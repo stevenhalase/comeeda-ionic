@@ -1,3 +1,34 @@
 page-profile-edit {
+  ion-item {
+    background: transparent !important;
+    color: #FFF !important;
+  }
 
+  ion-label {
+    color: #FFF !important;
+  }
+
+  .item-inner {
+    border-color: #FFF !important;
+  }
+
+  .item-select {
+    margin-top: 20px !important;
+
+    ion-select {
+      .select-icon-inner {
+        color: #FFF !important;
+      }
+    }
+  }
+
+  button.button-full {
+    margin-top: 20px !important;
+    background-color: #FFF !important;
+    color: #344E5D !important;
+  }
+
+  button.button-small {
+    color: #FFF !important;
+  }
 }
