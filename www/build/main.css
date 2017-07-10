@@ -25348,6 +25348,15 @@ page-service ion-item .item-inner {
   border: 0 !important;
 }
 
+page-service button.button-full {
+  background-color: #FFF !important;
+  color: #344E5D !important;
+}
+
+page-service button.button-small {
+  color: #FFF !important;
+}
+
 page-service #map {
   opacity: 0.5;
   height: 94%;
