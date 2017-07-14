@@ -1,22 +1,39 @@
 user-statistics {
 
   ion-card {
-    padding: 15px;
-    background-color: #344E5D !important;
+    position: relative;
+    text-align: center;
+    width: 100% !important;
+    margin: 0 0 0 0 !important;
+    height: 20%;
+  }
 
-    ion-grid {
-      text-align: center;
+  ion-card:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
 
-      ion-col {
-        h1 {
-          color: #FFF !important;
-          margin: 0 0 10px !important;
-        }
-        span {
-          color: #FFF !important;
-          display: block;
-        }
-      }
-    }
+  .card-title {
+    position: absolute;
+    top: 24%;
+    font-size: 2.5em;
+    width: 100%;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0,0,0,0.8);
+  }
+
+  .card-subtitle {
+    font-size: 1.5em;
+    position: absolute;
+    top: 52%;
+    width: 100%;
+    color: #fff;
+    text-shadow: 0 0 5px rgba(0,0,0,0.8);
   }
 }

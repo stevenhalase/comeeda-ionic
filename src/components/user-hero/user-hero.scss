@@ -1,8 +1,17 @@
 user-hero {
 
+  ion-card {
+    width: 100% !important;
+    margin: 0 0 0 0 !important;
+  }
+
   .card-background-page {
     position: relative;
     text-align: center;
+
+    img {
+      height: 40%;
+    }
     
     .card-img-container {
         max-height: 18em;
@@ -11,7 +20,10 @@ user-hero {
 
       .card-title-container {
         padding: 10px;
-        background-color: #344E5D !important;
+        background-color: rgba(0,0,0,0.8) !important;
+        position: absolute;
+        bottom: 0;
+        width: 100%;
       }
 
       .card-title {

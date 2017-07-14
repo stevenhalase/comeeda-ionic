@@ -25213,9 +25213,18 @@ ion-navbar.toolbar {
   }
 }
 
+user-hero ion-card {
+  width: 100% !important;
+  margin: 0 0 0 0 !important;
+}
+
 user-hero .card-background-page {
   position: relative;
   text-align: center;
+}
+
+user-hero .card-background-page img {
+  height: 40%;
 }
 
 user-hero .card-background-page .card-img-container {
@@ -25225,7 +25234,10 @@ user-hero .card-background-page .card-img-container {
 
 user-hero .card-background-page .card-title-container {
   padding: 10px;
-  background-color: #344E5D !important;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }
 
 user-hero .card-background-page .card-title {
@@ -25244,22 +25256,40 @@ user-hero .card-background-page .card-subtitle {
 }
 
 user-statistics ion-card {
-  padding: 15px;
-  background-color: #344E5D !important;
-}
-
-user-statistics ion-card ion-grid {
+  position: relative;
   text-align: center;
+  width: 100% !important;
+  margin: 0 0 0 0 !important;
+  height: 20%;
 }
 
-user-statistics ion-card ion-grid ion-col h1 {
-  color: #FFF !important;
-  margin: 0 0 10px !important;
-}
-
-user-statistics ion-card ion-grid ion-col span {
-  color: #FFF !important;
+user-statistics ion-card:before {
+  content: "";
   display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+user-statistics .card-title {
+  position: absolute;
+  top: 24%;
+  font-size: 2.5em;
+  width: 100%;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+}
+
+user-statistics .card-subtitle {
+  font-size: 1.5em;
+  position: absolute;
+  top: 52%;
+  width: 100%;
+  color: #fff;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
 }
 
 page-auth ion-content ion-item {
