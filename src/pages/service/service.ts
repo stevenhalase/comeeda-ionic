@@ -87,6 +87,12 @@ export class ServicePage {
         });
         toast.present();
         toast.onDidDismiss(() => {
+          tempPickup.geo = {
+            request: {
+              origin: volLatLng,
+              destination: donLatLng
+            }
+          }
           this.socketProvider.acceptPickupRequest(tempPickup);
         });
       });
