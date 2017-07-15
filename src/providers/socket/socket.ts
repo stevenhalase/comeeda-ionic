@@ -20,7 +20,10 @@ export class SocketProvider {
   public socketUrl: string;
 
   constructor(public http: Http, private events: Events, public authProvider: AuthProvider) {
+
+    // this.socketUrl = 'http://localhost:4000';
     this.socketUrl = 'https://comeeda-api.herokuapp.com';
+
     this.socket = io.connect(this.socketUrl);
     this.socket.on('connected', () => this.connect());
     this.socket.on('disconnected', () => this.disconnect());

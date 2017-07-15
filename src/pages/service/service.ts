@@ -241,12 +241,17 @@ export class ServicePage {
         });
 
         let watch = this.geolocation.watchPosition();
-        watch.subscribe((data) => {
+        watch.subscribe(data => {
           let currentLatLng = new google.maps.LatLng(data.coords.latitude, data.coords.longitude);
           this.currentMarker.setPosition(currentLatLng);
           this.map.panTo(currentLatLng);
           console.log('Updating location');
           if (this.activePickup) {
+            if (this.activePickup.geo.waypoints) {
+              this.activePickup.geo.waypoints.push(currentLatLng);
+            } else {
+              this.activePickup.geo.waypoints = [currentLatLng];
+            }
             this.socketProvider.updateVolunteerLocation(currentLatLng, this.activePickup);
             let donLatLng = new google.maps.LatLng(this.activePickup.donator.location.latitude, this.activePickup.donator.location.longitude);
             this.calculateAndDisplayRoute(this.directionsService, this.directionsDisplay, currentLatLng, donLatLng);
@@ -265,7 +270,11 @@ export class ServicePage {
         directionsDisplay.setOptions( { suppressMarkers: true } );
         directionsDisplay.setDirections(response);
       } else {
-        window.alert('Directions request failed due to ' + status);
+        let toast = this.toastCtrl.create({
+          message: 'Directions request failed due to ' + status,
+          duration: 3000
+        });
+        toast.present();
       }
     });
   }
