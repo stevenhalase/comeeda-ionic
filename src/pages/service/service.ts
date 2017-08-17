@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { NavController, Events, LoadingController, ToastController } from 'ionic-angular';
+import { NavController, Events, LoadingController, ToastController, AlertController } from 'ionic-angular';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { Geolocation } from '@ionic-native/geolocation';
 
@@ -28,6 +28,9 @@ export class ServicePage {
   directionsService: any;
   directionsDisplay: any;
   activePickup: any = null;
+  showProgressCounter: boolean = false;
+  progressCounterHeight: number = 100;
+  progressCounterInterval: any;
 
   constructor(
     public navCtrl: NavController,
@@ -37,7 +40,8 @@ export class ServicePage {
     private loadingCtrl: LoadingController,
     public toastCtrl: ToastController,
     private launchNavigator: LaunchNavigator,
-    private geolocation: Geolocation) {
+    private geolocation: Geolocation,
+    public alertCtrl: AlertController) {
 
       this.events.subscribe('foundVolunteers', foundVolunteers => {
         for (let volunteer of foundVolunteers) {
@@ -79,21 +83,59 @@ export class ServicePage {
         });
         this.map.panTo(volLatLng);
         this.calculateAndDisplayRoute(this.directionsService, this.directionsDisplay, volLatLng, donLatLng);
+        this.progressCounterHeight = 100;
+        this.showProgressCounter = true;
+        this.progressCounterInterval = setInterval(() => {
+          this.progressCounterHeight -= 0.1;
+        }, 10);
         let toast = this.toastCtrl.create({
           message: tempPickup.donator.firstname + ' has requested a pickup.',
           duration: 10000,
-          closeButtonText: 'Accept',
+          closeButtonText: 'Respond',
           showCloseButton: true
         });
         toast.present();
-        toast.onDidDismiss(() => {
-          tempPickup.geo = {
-            request: {
-              origin: volLatLng,
-              destination: donLatLng
-            }
+        toast.onWillDismiss((_null, role) => {
+          switch (role) {
+            case 'close':
+              this.showProgressCounter = false;
+              clearInterval(this.progressCounterInterval);
+              let alert = this.alertCtrl.create({
+                title: 'Confirm pickup',
+                message: 'Do you agree to this pickup?',
+                buttons: [
+                  {
+                    text: 'Deny',
+                    role: 'cancel',
+                    handler: () => {
+                      this.socketProvider.denyPickupRequest(tempPickup);
+                    }
+                  },
+                  {
+                    text: 'Accept',
+                    handler: () => {
+                      tempPickup.geo = {
+                        request: {
+                          origin: volLatLng,
+                          destination: donLatLng
+                        }
+                      }
+                      this.socketProvider.acceptPickupRequest(tempPickup);
+                    }
+                  }
+                ]
+              });
+              alert.present();
+              break;
+            case 'backdrop':
+              this.showProgressCounter = false;
+              clearInterval(this.progressCounterInterval);
+              this.socketProvider.denyPickupRequest(tempPickup);
+              break;
+            case 'custom':
+              console.log("toast.dismiss('custom'); called");
+              break;
           }
-          this.socketProvider.acceptPickupRequest(tempPickup);
         });
       });
 
@@ -157,6 +199,9 @@ export class ServicePage {
         this.socketProvider.findVolunteers();
         this.clearRoute();
         this.map.panTo(this.currentMarker.position);
+        if (this.loadingPopup) {
+          this.loadingPopup.dismiss();
+        }
         let toast = this.toastCtrl.create({
           message: 'Pickup has been canceled!',
           showCloseButton: true
@@ -183,7 +228,12 @@ export class ServicePage {
         this.donatorMarker.setMap(null);
         this.clearRoute();
         this.map.panTo(this.currentMarker.position);
-        this.completionLoadingPopup.dismiss();
+        if (this.completionLoadingPopup) {
+          this.completionLoadingPopup.dismiss();
+        }
+        if (this.loadingPopup) {
+          this.loadingPopup.dismiss();
+        }
         this.activePickup = null;
         let toast = this.toastCtrl.create({
           message: 'Pickup successfully canceled!',

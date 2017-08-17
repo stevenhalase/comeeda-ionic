@@ -25406,6 +25406,29 @@ page-service #offline-indicator {
   font-size: 2.5rem;
 }
 
+page-service .progress-counter {
+  position: fixed;
+  height: 100%;
+  width: 100vw;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  background: #667db6;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, left bottom, from(#667db6), color-stop(#0082c8), color-stop(#0082c8), to(#667db6));
+  background: linear-gradient(to bottom, #667db6, #0082c8, #0082c8, #667db6);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  display: none;
+}
+
+page-service .progress-counter-show {
+  opacity: 0.5;
+  display: block;
+}
+
 page-settings button {
   background-color: #344E5D !important;
   color: #FFF !important;

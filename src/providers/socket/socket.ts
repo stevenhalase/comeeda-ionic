@@ -7,12 +7,6 @@ import * as io from 'socket.io-client';
 
 import { AuthProvider } from '../auth/auth';
 
-/*
-  Generated class for the SocketProvider provider.
-
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
 @Injectable()
 export class SocketProvider {
 
@@ -76,6 +70,11 @@ export class SocketProvider {
   acceptPickupRequest(tempPickup: any) {
     console.log(tempPickup)
     this.socket.emit('acceptPickupRequest', tempPickup);
+  }
+
+  denyPickupRequest(tempPickup: any) {
+    console.log(tempPickup)
+    this.socket.emit('denyPickupRequest', tempPickup);
   }
 
   assignVolunteer(volunteer) {

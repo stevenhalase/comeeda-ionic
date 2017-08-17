@@ -20,4 +20,5 @@
     Offline
   </div>
   <div #map id="map" [ngClass]="{'online': online || authProvider.currentUser.membertype[0] !== 'volunteer'}"></div>
+  <div class="progress-counter" [ngClass]="{'progress-counter-show': showProgressCounter}" [style.height.%]="progressCounterHeight"></div>
 </ion-content>
