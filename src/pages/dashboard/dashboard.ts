@@ -29,7 +29,7 @@ export class DashboardPage {
     public events: Events) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
     this.authProvider.isAuthed().then(isAuthed => {
       if (!isAuthed) {
         this.presentAuthModal();

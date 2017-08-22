@@ -28,10 +28,6 @@ export class AuthPage {
     
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad AuthPage');
-  }
-
   login() {
     this.authProvider.loginUser(this.email, this.password).then(data => {
       if (data.error) {

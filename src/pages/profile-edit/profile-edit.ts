@@ -21,10 +21,6 @@ export class ProfileEditPage {
     private imagePicker: ImagePicker) {
   }
 
-  ionViewDidLoad() {
-    
-  }
-
   updateUser() {
     this.authProvider.updateUser(this.authProvider.currentUser).then(userData => {
       console.log(userData);
