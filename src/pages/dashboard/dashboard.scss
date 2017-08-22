@@ -1,3 +1,25 @@
 page-dashboard {
-  
+  ion-content {
+    ion-segment-button {
+      color: #FFF !important;
+      border-color: #FFF !important;
+      .segment-button.segment-activated {
+        border-color: #FFF !important;
+        color: #FFF !important;
+      }
+    }
+
+    .segment-button.segment-activated {
+      background-color: #344E5D !important;
+    }
+
+    ion-item {
+      background-color: #344E5D !important;
+      color: #FFF !important;
+
+      ion-badge {
+        background-color: #4f7387 !important;
+      }
+    }
+  }
 }

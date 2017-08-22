@@ -8,6 +8,11 @@ export class ApiProvider {
 
   apiRoot: string;
   apiRoutes: ApiRoutes;
+  statSelectionEnum = {
+    week: 'Week',
+    month: 'Month',
+    year: 'Year'
+  }
 
   constructor(public http: Http) {
     // this.apiRoot = 'http://localhost:4000/api/';
@@ -19,28 +24,53 @@ export class ApiProvider {
       userUpdate: this.apiRoot + 'users/',
       userNumberOfPickups: this.apiRoot + 'pickups/user/number/',
       userTotalDistanceOfPickups: this.apiRoot + 'pickups/user/distance/',
-      userTotalTimeOfPickups: this.apiRoot + 'pickups/user/time/'
+      userTotalTimeOfPickups: this.apiRoot + 'pickups/user/time/',
+      userStats: this.apiRoot + 'pickups/user/stats/'
     }
   }
 
-  getUserNumberOfPickups(userId: string): Promise<any> {
-    let promise = this.http.get(this.apiRoutes.userNumberOfPickups + userId)
+  getUserNumberOfPickups(userId: string, frame: any = null): Promise<any> {
+    let url = this.apiRoutes.userNumberOfPickups + userId;
+    if (frame) {
+      url += '/?frame=' + frame;
+    }
+    let promise = this.http.get(url)
       .map((res: any) => res.json())
       .toPromise();
 
     return promise;
   }
 
-  getUserTotalDistanceOfPickups(userId: string): Promise<any> {
-    let promise = this.http.get(this.apiRoutes.userTotalDistanceOfPickups + userId)
+  getUserTotalDistanceOfPickups(userId: string, frame: any = null): Promise<any> {
+    let url = this.apiRoutes.userTotalDistanceOfPickups + userId;
+    if (frame) {
+      url += '/?frame=' + frame;
+    }
+    let promise = this.http.get(url)
       .map((res: any) => res.json())
       .toPromise();
 
     return promise;
   }
 
-  getUserTotalTimeOfPickups(userId: string): Promise<any> {
-    let promise = this.http.get(this.apiRoutes.userTotalTimeOfPickups + userId)
+  getUserTotalTimeOfPickups(userId: string, frame: any = null): Promise<any> {
+    let url = this.apiRoutes.userTotalTimeOfPickups + userId;
+    if (frame) {
+      url += '/?frame=' + frame;
+    }
+    let promise = this.http.get(url)
+      .map((res: any) => res.json())
+      .toPromise();
+
+    return promise;
+  }
+
+  getUserStats(userId: string, frame: any): Promise<any> {
+    let url = this.apiRoutes.userStats + userId;
+    if (frame) {
+      url += '/?frame=' + frame;
+    }
+    let promise = this.http.get(url)
       .map((res: any) => res.json())
       .toPromise();
 
@@ -56,4 +86,5 @@ class ApiRoutes {
   userNumberOfPickups: string;
   userTotalDistanceOfPickups: string;
   userTotalTimeOfPickups: string;
+  userStats: string;
 }

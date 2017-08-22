@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController, ViewController } from 'ionic-angular';
 
+import { ImagePicker } from '@ionic-native/image-picker';
+
 import { AuthProvider } from '../../providers/auth/auth';
 
 @IonicPage()
@@ -15,7 +17,8 @@ export class ProfileEditPage {
     public navParams: NavParams,
     public authProvider: AuthProvider,
     public toastCtrl: ToastController, 
-    public viewCtrl: ViewController) {
+    public viewCtrl: ViewController,
+    private imagePicker: ImagePicker) {
   }
 
   ionViewDidLoad() {
@@ -37,6 +40,14 @@ export class ProfileEditPage {
       duration: 3000
     });
     toast.present();
+  }
+
+  selectProfileImage() {
+    this.imagePicker.getPictures({maximumImagesCount: 1}).then((results) => {
+      for (var i = 0; i < results.length; i++) {
+          console.log('Image URI: ' + results[i]);
+      }
+    }, (err) => { console.log(err) });
   }
 
   dismiss() {

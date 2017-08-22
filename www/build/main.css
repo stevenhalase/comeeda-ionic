@@ -25338,6 +25338,29 @@ page-auth ion-content .item-select ion-select .select-icon-inner {
   color: #FFF !important;
 }
 
+page-dashboard ion-content ion-segment-button {
+  color: #FFF !important;
+  border-color: #FFF !important;
+}
+
+page-dashboard ion-content ion-segment-button .segment-button.segment-activated {
+  border-color: #FFF !important;
+  color: #FFF !important;
+}
+
+page-dashboard ion-content .segment-button.segment-activated {
+  background-color: #344E5D !important;
+}
+
+page-dashboard ion-content ion-item {
+  background-color: #344E5D !important;
+  color: #FFF !important;
+}
+
+page-dashboard ion-content ion-item ion-badge {
+  background-color: #4f7387 !important;
+}
+
 page-profile-edit ion-item {
   background: transparent !important;
   color: #FFF !important;

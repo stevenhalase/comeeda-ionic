@@ -46,6 +46,9 @@
       <ion-label floating>State</ion-label>
       <ion-input type="text" name="state" [(ngModel)]="authProvider.currentUser.state"></ion-input>
     </ion-item>
+    <ion-item>
+      <button ion-button full type="button" (click)="selectProfileImage()">Select Profile Image</button>
+    </ion-item>
     <button ion-button full type="submit">Update</button>
   </form>
 </ion-content>

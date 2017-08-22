@@ -6,5 +6,38 @@
 
 <ion-content padding>
   <user-hero></user-hero>
-  <user-statistics></user-statistics>
+  <!-- <user-statistics></user-statistics> -->
+
+  <div padding>
+    <ion-segment [(ngModel)]="statSelection" (ngModelChange)="changeStatFrame()">
+      <ion-segment-button value="Week">
+        Week
+      </ion-segment-button>
+      <ion-segment-button value="Month">
+        Month
+      </ion-segment-button>
+      <ion-segment-button value="Year">
+        Year
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <ion-list padding>
+    <ion-item>
+      <ion-icon name="cube" item-start></ion-icon>
+      Pickups Completed
+      <ion-badge item-end>{{userNumberOfPickups}}</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="speedometer" item-start></ion-icon>
+      Total Distance
+      <ion-badge item-end>{{userTotalDistanceOfPickups.toFixed(2)}} Miles</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="stopwatch" item-start></ion-icon>
+      Total Pickup Time
+      <ion-badge item-end>{{userTotalTimeOfPickups.toFixed(2)}} Hours</ion-badge>
+    </ion-item>
+  </ion-list>
 </ion-content>
+
+

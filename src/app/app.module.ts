@@ -24,6 +24,7 @@ import { UserStatisticsComponent } from '../components/user-statistics/user-stat
 import { Geolocation } from '@ionic-native/geolocation';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { GoogleMaps } from '@ionic-native/google-maps';
+import { ImagePicker } from '@ionic-native/image-picker';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { GoogleMaps } from '@ionic-native/google-maps';
     ApiProvider,
     Geolocation,
     GoogleMaps,
-    LaunchNavigator
+    LaunchNavigator,
+    ImagePicker
   ]
 })
 export class AppModule {}

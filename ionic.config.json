@@ -1,5 +1,8 @@
 {
   "name": "comeeda",
-  "app_id": "",
-  "type": "ionic-angular"
+  "app_id": "610d9bf2",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
 }
