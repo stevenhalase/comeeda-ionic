@@ -37,6 +37,9 @@
       Total Pickup Time
       <ion-badge item-end>{{userTotalTimeOfPickups.toFixed(2)}} Hours</ion-badge>
     </ion-item>
+    <ion-item text-center>
+      <button ion-button full clear (click)="presentPickupList()">View</button>
+    </ion-item>
   </ion-list>
 </ion-content>
 

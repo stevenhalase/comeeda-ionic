@@ -11,6 +11,7 @@ import { SettingsPage } from '../pages/settings/settings';
 import { TabsPage } from '../pages/tabs/tabs';
 import { AuthPage } from '../pages/auth/auth';
 import { ProfileEditPage } from '../pages/profile-edit/profile-edit';
+import { PickupListPage } from '../pages/pickup-list/pickup-list';
 
 import { AuthProvider } from '../providers/auth/auth';
 import { SocketProvider } from '../providers/socket/socket';
@@ -35,6 +36,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
     TabsPage,
     AuthPage,
     ProfileEditPage,
+    PickupListPage,
     UserHeroComponent,
     UserStatisticsComponent
   ],
@@ -53,6 +55,7 @@ import { ImagePicker } from '@ionic-native/image-picker';
     TabsPage,
     AuthPage,
     ProfileEditPage,
+    PickupListPage,
     UserHeroComponent
   ],
   providers: [

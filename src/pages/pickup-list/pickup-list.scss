@@ -1,0 +1,49 @@
+page-pickup-list {
+  ion-navbar {
+    ion-buttons {
+      button {
+        color: #FFF !important;
+      }
+    }
+  }
+
+  ion-content {
+    ion-card {
+      background-color: #344E5D !important;
+      color: #FFF !important;
+
+      ion-item {
+        background-color: #344E5D !important;
+        color: #FFF !important;
+
+        ion-badge {
+          background-color: #4f7387 !important;
+        }
+
+        button {
+          background-color: #4f7387 !important;
+          color: #FFF !important;
+        }
+      }
+    }
+  }
+
+  .cancelled {
+    background-color: #666 !important;
+      color: #FFF !important;
+
+      ion-item {
+        background-color: #666 !important;
+        color: #FFF !important;
+
+        ion-badge {
+          background-color: #444 !important;
+        }
+
+        button {
+          background-color: #444 !important;
+          color: #FFF !important;
+        }
+      }
+  }
+}

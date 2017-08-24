@@ -4,6 +4,7 @@ import { NavController, ModalController, Events } from 'ionic-angular';
 import { AuthProvider } from '../../providers/auth/auth';
 import { ApiProvider } from '../../providers/api/api';
 import { AuthPage } from '../../pages/auth/auth';
+import { PickupListPage } from '../../pages/pickup-list/pickup-list';
 import { SocketProvider } from '../../providers/socket/socket';
 
 // import anime from 'animejs'
@@ -51,6 +52,13 @@ export class DashboardPage {
       this.userNumberOfPickups = data.result.count;
       this.userTotalDistanceOfPickups = data.result.totalDistance;
       this.userTotalTimeOfPickups = data.result.totalTime;
+    });
+  }
+
+  presentPickupList() {
+    this.apiProvider.getUserPickups(this.authProvider.currentUser._id, this.statSelection).then(data => {
+      let pickupListModal = this.modalCtrl.create(PickupListPage, { pickups: data });
+      pickupListModal.present();
     });
   }
 

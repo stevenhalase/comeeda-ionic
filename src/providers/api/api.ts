@@ -15,18 +15,32 @@ export class ApiProvider {
   }
 
   constructor(public http: Http) {
-    // this.apiRoot = 'http://localhost:4000/api/';
-    this.apiRoot = 'https://comeeda-api.herokuapp.com/api/';
+    this.apiRoot = 'http://localhost:4000/api/';
+    // this.apiRoot = 'https://comeeda-api.herokuapp.com/api/';
 
     this.apiRoutes = {
       userLogin: this.apiRoot + 'users/login',
       userSignup: this.apiRoot + 'users',
       userUpdate: this.apiRoot + 'users/',
+      userPickups: this.apiRoot + 'pickups/user/',
       userNumberOfPickups: this.apiRoot + 'pickups/user/number/',
       userTotalDistanceOfPickups: this.apiRoot + 'pickups/user/distance/',
       userTotalTimeOfPickups: this.apiRoot + 'pickups/user/time/',
-      userStats: this.apiRoot + 'pickups/user/stats/'
+      userStats: this.apiRoot + 'pickups/user/stats/',
+      pickupStaticMap: this.apiRoot + 'pickups/staticmap/'
     }
+  }
+
+  getUserPickups(userId: string, frame: any = null): Promise<any> {
+    let url = this.apiRoutes.userPickups + userId;
+    if (frame) {
+      url += '/?frame=' + frame;
+    }
+    let promise = this.http.get(url)
+      .map((res: any) => res.json())
+      .toPromise();
+
+    return promise;
   }
 
   getUserNumberOfPickups(userId: string, frame: any = null): Promise<any> {
@@ -77,14 +91,25 @@ export class ApiProvider {
     return promise;
   }
 
+  getPickupStaticMap(pickupId): Promise<any> {
+    let url = this.apiRoutes.pickupStaticMap + pickupId;
+    let promise = this.http.get(url)
+      .map((res: any) => res.json())
+      .toPromise();
+
+    return promise;
+  }
+
 }
 
 class ApiRoutes {
   userLogin: string;
   userSignup: string;
   userUpdate: string;
+  userPickups: string;
   userNumberOfPickups: string;
   userTotalDistanceOfPickups: string;
   userTotalTimeOfPickups: string;
   userStats: string;
+  pickupStaticMap: string;
 }

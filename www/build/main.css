@@ -25361,6 +25361,53 @@ page-dashboard ion-content ion-item ion-badge {
   background-color: #4f7387 !important;
 }
 
+page-dashboard ion-content ion-item button {
+  background-color: #4f7387 !important;
+  color: #FFF !important;
+}
+
+page-pickup-list ion-navbar ion-buttons button {
+  color: #FFF !important;
+}
+
+page-pickup-list ion-content ion-card {
+  background-color: #344E5D !important;
+  color: #FFF !important;
+}
+
+page-pickup-list ion-content ion-card ion-item {
+  background-color: #344E5D !important;
+  color: #FFF !important;
+}
+
+page-pickup-list ion-content ion-card ion-item ion-badge {
+  background-color: #4f7387 !important;
+}
+
+page-pickup-list ion-content ion-card ion-item button {
+  background-color: #4f7387 !important;
+  color: #FFF !important;
+}
+
+page-pickup-list .cancelled {
+  background-color: #666 !important;
+  color: #FFF !important;
+}
+
+page-pickup-list .cancelled ion-item {
+  background-color: #666 !important;
+  color: #FFF !important;
+}
+
+page-pickup-list .cancelled ion-item ion-badge {
+  background-color: #444 !important;
+}
+
+page-pickup-list .cancelled ion-item button {
+  background-color: #444 !important;
+  color: #FFF !important;
+}
+
 page-profile-edit ion-item {
   background: transparent !important;
   color: #FFF !important;
