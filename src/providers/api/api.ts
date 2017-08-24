@@ -15,8 +15,8 @@ export class ApiProvider {
   }
 
   constructor(public http: Http) {
-    this.apiRoot = 'http://localhost:4000/api/';
-    // this.apiRoot = 'https://comeeda-api.herokuapp.com/api/';
+    // this.apiRoot = 'http://localhost:4000/api/';
+    this.apiRoot = 'https://comeeda-api.herokuapp.com/api/';
 
     this.apiRoutes = {
       userLogin: this.apiRoot + 'users/login',
