@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { NavController, ModalController, Events } from 'ionic-angular';
+import { NavController, ModalController, Events, LoadingController } from 'ionic-angular';
 
 import { AuthProvider } from '../../providers/auth/auth';
 import { ApiProvider } from '../../providers/api/api';
@@ -27,7 +27,8 @@ export class DashboardPage {
     public apiProvider: ApiProvider,
     public modalCtrl: ModalController,
     public socketProvider: SocketProvider,
-    public events: Events) {
+    public events: Events,
+    public loadingCtrl: LoadingController) {
   }
 
   ionViewDidEnter() {
@@ -48,16 +49,32 @@ export class DashboardPage {
   }
 
   changeStatFrame() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+      spinner: 'crescent',
+      enableBackdropDismiss: false
+    });
+
+    loading.present();
     this.apiProvider.getUserStats(this.authProvider.currentUser._id, this.statSelection).then(data => {
       this.userNumberOfPickups = data.result.count;
       this.userTotalDistanceOfPickups = data.result.totalDistance;
       this.userTotalTimeOfPickups = data.result.totalTime;
+      loading.dismiss();
     });
   }
 
   presentPickupList() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+      spinner: 'crescent',
+      enableBackdropDismiss: false
+    });
+
+    loading.present();
     this.apiProvider.getUserPickups(this.authProvider.currentUser._id, this.statSelection).then(data => {
       let pickupListModal = this.modalCtrl.create(PickupListPage, { pickups: data });
+      loading.dismiss();
       pickupListModal.present();
     });
   }

@@ -3,6 +3,8 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
+import { LoadingController } from 'ionic-angular';
+
 import { Storage } from '@ionic/storage';
 import { Events } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
@@ -19,29 +21,47 @@ export class AuthProvider {
     public apiProvider: ApiProvider,
     public events: Events,
     private storage: Storage,
-    private geolocation: Geolocation) {
+    private geolocation: Geolocation,
+    public loadingCtrl: LoadingController) {
     
   }
 
   isAuthed(): Promise<boolean> {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+      spinner: 'crescent',
+      enableBackdropDismiss: false
+    });
+
+    loading.present();
     return new Promise((resolve, reject) => {
       if (this.currentUser) {
         console.log(this.currentUser)
         this.events.publish('user:login');
+        loading.dismiss();
         resolve(true);
       } else {
         this.checkStorageUser().then(userData =>{
           if (!this.currentUser) {
             reject(false);
+            loading.dismiss();
           } else {
             this.events.publish('user:login', this.currentUser);
+            loading.dismiss();
             resolve(true);
           }
         }, error => {
+          loading.dismiss();
           reject(false);
         });
       }
     })
+  }
+
+  updateCurrentUser(user) {
+    this.storage.set('user', user);
+    this.storage.set('userExp', new Date(Date.now() + (1000*60*60*24)));
+    this.currentUser = user;
   }
 
   checkStorageUser(): Promise<any> {
@@ -102,7 +122,7 @@ export class AuthProvider {
   }
 
   signupUser(email: string, password: string, membertype: string, location: Object): Promise<any> {
-    let promise = this.http.post(this.apiProvider.apiRoutes.userSignup, {email: email, password: password, membertype: membertype, location: location} )
+    let promise = this.http.post(this.apiProvider.apiRoutes.userSignup, { email: email, password: password, membertype: membertype, location: location, firstname: 'Marty', lastname: 'Byrde', city: 'Sunrise Beach', state: 'MO' } )
       .map((res: any) => res.json())
       .toPromise();
 

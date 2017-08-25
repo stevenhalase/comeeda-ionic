@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>PickupList</ion-title>
+    <ion-title>Pickups</ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
         <span ion-text showWhen="ios">Cancel</span>
@@ -24,10 +24,12 @@
       </ion-item>
     </ion-card-content>
   </ion-card>
-  <!-- <ion-list padding>
-    <ion-item *ngFor="let pickup of pickups" (click)="presentPickupDetail(pickup)">
-      {{pickup.date | date:'MMM d h:m a'}}
-      <ion-badge item-end>{{pickup.distance.toFixed(2)}} Miles</ion-badge>
-    </ion-item>
-  </ion-list> -->
+  <ion-card *ngIf="pickups.length < 1">
+    <img src="https://goo.gl/8L9Cu4"/>
+    <ion-card-content>
+      <ion-item>
+        No pickups have been completed.
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

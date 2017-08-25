@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ToastController, LoadingController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { AuthProvider } from '../../providers/auth/auth';
@@ -24,22 +24,39 @@ export class AuthPage {
     public authProvider: AuthProvider, 
     public viewCtrl: ViewController, 
     private geolocation: Geolocation,
-    public toastCtrl: ToastController) {
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController) {
     
   }
 
   login() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+      spinner: 'crescent',
+      enableBackdropDismiss: false
+    });
+
+    loading.present();
     this.authProvider.loginUser(this.email, this.password).then(data => {
       if (data.error) {
         console.log(data.error)
+        loading.dismiss();
         this.authFailureToast(data.error);
       } else {
+        loading.dismiss();
         this.viewCtrl.dismiss(data);
       }
     })
   }
 
   signUp() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+      spinner: 'crescent',
+      enableBackdropDismiss: false
+    });
+
+    loading.present();
     this.geolocation.getCurrentPosition().then((resp) => {
       this.location = {
         heading : resp.coords.heading,
@@ -49,13 +66,16 @@ export class AuthPage {
       }
       this.authProvider.signupUser(this.email, this.password, this.membertype, this.location).then(data => {
         if (data.error) {
+          loading.dismiss();
           console.log(data.error);
           this.authFailureToast(data.error);
         } else {
+          loading.dismiss();
           this.viewCtrl.dismiss(data);
         }
       })
     }).catch((error) => {
+      loading.dismiss();
       console.log('Error getting location', error);
     });
   }

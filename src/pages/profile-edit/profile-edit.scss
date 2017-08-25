@@ -32,4 +32,14 @@ page-profile-edit {
   button.button-small {
     color: #FFF !important;
   }
+
+  .profile-image {
+    .item-inner {
+      padding-right: 0 !important;
+
+      ion-label {
+        margin: 13px 0 !important;
+      }
+    }
+  }
 }

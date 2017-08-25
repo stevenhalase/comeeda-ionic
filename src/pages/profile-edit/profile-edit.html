@@ -14,6 +14,10 @@
 
 
 <ion-content padding>
+  <ion-item class="profile-image">
+    <img src="{{authProvider.currentUser ? authProvider.currentUser.image ? apiProvider.apiRoutes.userProfilePicture + authProvider.currentUser.image : 'https://goo.gl/o7tDYJ' : 'https://goo.gl/o7tDYJ'}}"/>
+    <button ion-button full type="button" (click)="selectProfileImage()">Select Profile Image</button>
+  </ion-item>
   <form (ngSubmit)="updateUser()">
     <ion-item>
       <ion-label>Member Type</ion-label>
@@ -45,10 +49,6 @@
     <ion-item>
       <ion-label floating>State</ion-label>
       <ion-input type="text" name="state" [(ngModel)]="authProvider.currentUser.state"></ion-input>
-    </ion-item>
-    <ion-item text-center>
-      <img src="{{authProvider.currentUser ? authProvider.currentUser.image ? apiProvider.apiRoutes.userProfilePicture + authProvider.currentUser.image : 'http://www.sheffield.com/wp-content/uploads/2013/06/placeholder.png' : 'http://www.sheffield.com/wp-content/uploads/2013/06/placeholder.png'}}"/>
-      <button ion-button full type="button" (click)="selectProfileImage()">Select Profile Image</button>
     </ion-item>
     <button ion-button full type="submit">Update</button>
   </form>

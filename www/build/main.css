@@ -25437,6 +25437,14 @@ page-profile-edit button.button-small {
   color: #FFF !important;
 }
 
+page-profile-edit .profile-image .item-inner {
+  padding-right: 0 !important;
+}
+
+page-profile-edit .profile-image .item-inner ion-label {
+  margin: 13px 0 !important;
+}
+
 page-service ion-item {
   background-color: #344E5D !important;
   color: #FFF !important;

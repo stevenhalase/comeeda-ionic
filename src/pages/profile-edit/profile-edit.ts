@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ViewController, LoadingController } from 'ionic-angular';
 
 import { ImagePicker } from '@ionic-native/image-picker';
 
@@ -22,23 +22,33 @@ export class ProfileEditPage {
     public apiProvider: ApiProvider,
     public toastCtrl: ToastController, 
     public viewCtrl: ViewController,
-    private imagePicker: ImagePicker) {
+    private imagePicker: ImagePicker,
+    public loadingCtrl: LoadingController) {
   }
 
   updateUser() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+      spinner: 'crescent',
+      enableBackdropDismiss: false
+    });
+
+    loading.present();
     this.authProvider.updateUser(this.authProvider.currentUser)
       .then(userData => {
         console.log(userData);
-        this.presentToast();
+        loading.dismiss();
+        this.presentToast('Profile updated successfully');
       })
       .catch(error => {
+        loading.dismiss();
         console.log(error);
       })
   }
 
-  presentToast() {
+  presentToast(message) {
     let toast = this.toastCtrl.create({
-      message: 'Profile updated successfully',
+      message: message,
       duration: 3000
     });
     toast.present();
@@ -48,11 +58,21 @@ export class ProfileEditPage {
     this.imagePicker.getPictures({maximumImagesCount: 1}).then((results) => {
       for (var i = 0; i < results.length; i++) {
           let profileImg = results[i];
+          let loading = this.loadingCtrl.create({
+            content: 'Please wait...',
+            spinner: 'crescent',
+            enableBackdropDismiss: false
+          });
+
+          loading.present();
           this.apiProvider.uploadProfilePicture(this.authProvider.currentUser._id, profileImg).then(data => {
-              console.log(data);
+              loading.dismiss();
+              this.authProvider.updateCurrentUser(data);
+              this.presentToast('Profile picture updated successfully');
             })
             .catch(error => {
-              console.log(error);
+              loading.dismiss();
+              this.presentToast(error);
             })
       }
     }, (err) => { console.log(err) });
