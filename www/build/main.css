@@ -25221,10 +25221,7 @@ user-hero ion-card {
 user-hero .card-background-page {
   position: relative;
   text-align: center;
-}
-
-user-hero .card-background-page img {
-  height: 40%;
+  max-height: 40vh;
 }
 
 user-hero .card-background-page .card-img-container {

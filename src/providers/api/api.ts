@@ -3,6 +3,9 @@ import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
+
 @Injectable()
 export class ApiProvider {
 
@@ -14,7 +17,9 @@ export class ApiProvider {
     year: 'Year'
   }
 
-  constructor(public http: Http) {
+  constructor(public http: Http,
+    private transfer: FileTransfer, 
+    private file: File) {
     // this.apiRoot = 'http://localhost:4000/api/';
     this.apiRoot = 'https://comeeda-api.herokuapp.com/api/';
 
@@ -27,8 +32,20 @@ export class ApiProvider {
       userTotalDistanceOfPickups: this.apiRoot + 'pickups/user/distance/',
       userTotalTimeOfPickups: this.apiRoot + 'pickups/user/time/',
       userStats: this.apiRoot + 'pickups/user/stats/',
-      pickupStaticMap: this.apiRoot + 'pickups/staticmap/'
+      pickupStaticMap: this.apiRoot + 'pickups/staticmap/',
+      userProfilePicture: this.apiRoot + 'users/profilepicture/'
     }
+  }
+
+  uploadProfilePicture(userId: string, profileImageUri: string) {
+    const fileTransfer: FileTransferObject = this.transfer.create();
+
+    let options: FileUploadOptions = {
+      fileKey: 'file',
+      fileName: 'profile.jpg'
+    }
+
+    return fileTransfer.upload(profileImageUri, this.apiRoutes.userProfilePicture + userId, options);
   }
 
   getUserPickups(userId: string, frame: any = null): Promise<any> {
@@ -112,4 +129,5 @@ class ApiRoutes {
   userTotalTimeOfPickups: string;
   userStats: string;
   pickupStaticMap: string;
+  userProfilePicture: string;
 }

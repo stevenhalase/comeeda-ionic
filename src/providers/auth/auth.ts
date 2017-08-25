@@ -26,6 +26,7 @@ export class AuthProvider {
   isAuthed(): Promise<boolean> {
     return new Promise((resolve, reject) => {
       if (this.currentUser) {
+        console.log(this.currentUser)
         this.events.publish('user:login');
         resolve(true);
       } else {
@@ -82,6 +83,7 @@ export class AuthProvider {
           this.storage.set('user', data);
           this.storage.set('userExp', new Date(Date.now() + (1000*60*60*24)));
           this.currentUser = data;
+          console.log(this.currentUser)
           this.geolocation.getCurrentPosition().then((resp) => {
               this.currentUser.location = {
                 heading : resp.coords.heading,

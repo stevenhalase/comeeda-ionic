@@ -46,7 +46,8 @@
       <ion-label floating>State</ion-label>
       <ion-input type="text" name="state" [(ngModel)]="authProvider.currentUser.state"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item text-center>
+      <img src="{{authProvider.currentUser ? authProvider.currentUser.image ? apiProvider.apiRoutes.userProfilePicture + authProvider.currentUser.image : 'http://www.sheffield.com/wp-content/uploads/2013/06/placeholder.png' : 'http://www.sheffield.com/wp-content/uploads/2013/06/placeholder.png'}}"/>
       <button ion-button full type="button" (click)="selectProfileImage()">Select Profile Image</button>
     </ion-item>
     <button ion-button full type="submit">Update</button>

@@ -26,6 +26,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@ionic-native/launch-navigator';
 import { GoogleMaps } from '@ionic-native/google-maps';
 import { ImagePicker } from '@ionic-native/image-picker';
+import { FileTransfer } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { ImagePicker } from '@ionic-native/image-picker';
     Geolocation,
     GoogleMaps,
     LaunchNavigator,
-    ImagePicker
+    ImagePicker,
+    FileTransfer,
+    File
   ]
 })
 export class AppModule {}

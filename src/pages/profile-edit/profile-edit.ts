@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, ToastController, ViewController } 
 import { ImagePicker } from '@ionic-native/image-picker';
 
 import { AuthProvider } from '../../providers/auth/auth';
+import { ApiProvider } from '../../providers/api/api';
 
 @IonicPage()
 @Component({
@@ -12,22 +13,27 @@ import { AuthProvider } from '../../providers/auth/auth';
 })
 export class ProfileEditPage {
 
+  filestackClient: any;
+
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams,
     public authProvider: AuthProvider,
+    public apiProvider: ApiProvider,
     public toastCtrl: ToastController, 
     public viewCtrl: ViewController,
     private imagePicker: ImagePicker) {
   }
 
   updateUser() {
-    this.authProvider.updateUser(this.authProvider.currentUser).then(userData => {
-      console.log(userData);
-      this.presentToast();
-    }, error => {
-      console.log(error);
-    })
+    this.authProvider.updateUser(this.authProvider.currentUser)
+      .then(userData => {
+        console.log(userData);
+        this.presentToast();
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }
 
   presentToast() {
@@ -41,7 +47,13 @@ export class ProfileEditPage {
   selectProfileImage() {
     this.imagePicker.getPictures({maximumImagesCount: 1}).then((results) => {
       for (var i = 0; i < results.length; i++) {
-          console.log('Image URI: ' + results[i]);
+          let profileImg = results[i];
+          this.apiProvider.uploadProfilePicture(this.authProvider.currentUser._id, profileImg).then(data => {
+              console.log(data);
+            })
+            .catch(error => {
+              console.log(error);
+            })
       }
     }, (err) => { console.log(err) });
   }

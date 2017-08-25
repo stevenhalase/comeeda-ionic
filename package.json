@@ -21,6 +21,8 @@
     "@angular/platform-browser": "4.1.3",
     "@angular/platform-browser-dynamic": "4.1.3",
     "@ionic-native/core": "3.12.1",
+    "@ionic-native/file": "^4.1.0",
+    "@ionic-native/file-transfer": "^4.1.0",
     "@ionic-native/geolocation": "^3.13.0",
     "@ionic-native/google-maps": "^3.13.0",
     "@ionic-native/image-picker": "^4.1.0",

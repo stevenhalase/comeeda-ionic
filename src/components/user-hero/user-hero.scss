@@ -8,9 +8,11 @@ user-hero {
   .card-background-page {
     position: relative;
     text-align: center;
+    max-height: 40vh;
 
     img {
-      height: 40%;
+      // height: 40%;
+      // max-height: 40%;
     }
     
     .card-img-container {
