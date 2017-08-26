@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, PACKAGE_ROOT_URL, ViewChild } from '@angular/core';
 import { NavController, ModalController, Events, LoadingController } from 'ionic-angular';
 
 import { AuthProvider } from '../../providers/auth/auth';
@@ -22,6 +22,8 @@ export class DashboardPage {
   statSelection = this.apiProvider.statSelectionEnum.week;
   rankingSelection = this.apiProvider.rankingSelectionEnum.pickups;
   rankedNumberUsers: Array<any> = [];
+  rankedTimeUsers: Array<any> = [];
+  rankedDistanceUsers: Array<any> = [];
 
   constructor(
     public navCtrl: NavController, 
@@ -44,9 +46,8 @@ export class DashboardPage {
           this.userTotalDistanceOfPickups = data.result.totalDistance;
           this.userTotalTimeOfPickups = data.result.totalTime;
         });
-        this.apiProvider.getRankedNumberUsers().then(data => {
+        this.apiProvider.getRankedUsers(this.rankingSelection).then(data => {
           this.rankedNumberUsers = data;
-          console.log(this.rankedNumberUsers)
         });
       }
     }, error => {
@@ -70,6 +71,26 @@ export class DashboardPage {
     });
   }
 
+  changeRankedFrame() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...',
+      spinner: 'crescent',
+      enableBackdropDismiss: false
+    });
+
+    loading.present();
+    this.apiProvider.getRankedUsers(this.rankingSelection).then(data => {
+      if (this.rankingSelection == this.apiProvider.rankingSelectionEnum.pickups) {
+        this.rankedNumberUsers = data;
+      } else if (this.rankingSelection == this.apiProvider.rankingSelectionEnum.time) {
+        this.rankedTimeUsers = data;
+      } else if (this.rankingSelection == this.apiProvider.rankingSelectionEnum.distance) {
+        this.rankedDistanceUsers = data;
+      }
+      loading.dismiss();
+    });
+  }
+
   presentPickupList() {
     let loading = this.loadingCtrl.create({
       content: 'Please wait...',
@@ -88,6 +109,16 @@ export class DashboardPage {
   presentAuthModal() {
     let authModal = this.modalCtrl.create(AuthPage, null, { enableBackdropDismiss: false });
     authModal.present();
+    authModal.onDidDismiss(() => {
+      this.apiProvider.getUserStats(this.authProvider.currentUser._id, this.apiProvider.statSelectionEnum.week).then(data => {
+          this.userNumberOfPickups = data.result.count;
+          this.userTotalDistanceOfPickups = data.result.totalDistance;
+          this.userTotalTimeOfPickups = data.result.totalTime;
+        });
+        this.apiProvider.getRankedUsers(this.rankingSelection).then(data => {
+          this.rankedNumberUsers = data;
+        });
+    })
   }
 
 }

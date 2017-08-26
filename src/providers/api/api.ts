@@ -17,7 +17,9 @@ export class ApiProvider {
     year: 'Year'
   }
   rankingSelectionEnum = {
-    pickups: 'Pickups'
+    pickups: 'Pickups',
+    distance: 'Distance',
+    time: 'Time'
   }
 
   constructor(public http: Http,
@@ -31,7 +33,7 @@ export class ApiProvider {
       userSignup: this.apiRoot + 'users',
       userUpdate: this.apiRoot + 'users/',
       userPickups: this.apiRoot + 'pickups/user/',
-      rankedNumberUsers: this.apiRoot + 'users/rankings/pickups',
+      rankedUsers: this.apiRoot + 'users/rankings/',
       userNumberOfPickups: this.apiRoot + 'pickups/user/number/',
       userTotalDistanceOfPickups: this.apiRoot + 'pickups/user/distance/',
       userTotalTimeOfPickups: this.apiRoot + 'pickups/user/time/',
@@ -64,8 +66,12 @@ export class ApiProvider {
     return promise;
   }
 
-  getRankedNumberUsers(): Promise<any> {
-    let promise = this.http.get(this.apiRoutes.rankedNumberUsers)
+  getRankedUsers(type: string): Promise<any> {
+    let url = this.apiRoutes.rankedUsers;
+    if (type) {
+      url += type;
+    }
+    let promise = this.http.get(url)
       .map((res: any) => res.json())
       .toPromise();
 
@@ -142,5 +148,5 @@ class ApiRoutes {
   userStats: string;
   pickupStaticMap: string;
   userProfilePicture: string;
-  rankedNumberUsers: string;
+  rankedUsers: string;
 }

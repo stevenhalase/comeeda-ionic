@@ -43,29 +43,52 @@
   </ion-list>
 
   <div padding>
-    <ion-segment [(ngModel)]="rankingSelection">
+    <ion-segment [(ngModel)]="rankingSelection"  (ngModelChange)="changeRankedFrame()">
       <ion-segment-button value="Pickups">
         Pickups
       </ion-segment-button>
-      <ion-segment-button value="Time On Pickups">
-        Time On Pickups
+      <ion-segment-button value="Distance">
+        Distance
       </ion-segment-button>
-      <ion-segment-button value="Rating">
-        Rating
+      <ion-segment-button value="Time">
+        Time
       </ion-segment-button>
     </ion-segment>
   </div>
   <ion-list padding>
     <ion-list-header>
-      Volunteer Rankings
+      Volunteer Leaderboard
     </ion-list-header>
-    <ion-item *ngFor="let rankedResult of rankedNumberUsers; let i = index">
-      <ion-avatar item-start>
-        <img src="{{rankedResult.user.image ? apiProvider.apiRoutes.userProfilePicture + rankedResult.user.image : 'https://goo.gl/o7tDYJ'}}">
-      </ion-avatar>
-      {{rankedResult.user.firstname ? rankedResult.user.firstname : 'Something'}}
-      <h3 item-end>{{rankedResult.count}}</h3>
-    </ion-item>
+    <div *ngIf="rankingSelection === 'Pickups'">
+      <ion-item *ngFor="let rankedResult of rankedNumberUsers; let i = index">
+        <ion-avatar item-start>
+          <img src="{{rankedResult.user.image ? apiProvider.apiRoutes.userProfilePicture + rankedResult.user.image : 'https://goo.gl/o7tDYJ'}}">
+        </ion-avatar>
+        {{rankedResult.user.firstname ? rankedResult.user.firstname : ''}}
+        {{rankedResult.user.lastname ? rankedResult.user.lastname : ''}}
+        <h3 item-end>{{rankedResult.count}} Pickups</h3>
+      </ion-item>
+    </div>
+    <div *ngIf="rankingSelection === 'Distance'">
+      <ion-item *ngFor="let rankedResult of rankedDistanceUsers; let i = index">
+        <ion-avatar item-start>
+          <img src="{{rankedResult.user.image ? apiProvider.apiRoutes.userProfilePicture + rankedResult.user.image : 'https://goo.gl/o7tDYJ'}}">
+        </ion-avatar>
+        {{rankedResult.user.firstname ? rankedResult.user.firstname : ''}}
+        {{rankedResult.user.lastname ? rankedResult.user.lastname : ''}}
+        <h3 item-end>{{rankedResult.distance.toFixed(2)}} Miles</h3>
+      </ion-item>
+    </div>
+    <div *ngIf="rankingSelection === 'Time'">
+      <ion-item *ngFor="let rankedResult of rankedTimeUsers; let i = index">
+        <ion-avatar item-start>
+          <img src="{{rankedResult.user.image ? apiProvider.apiRoutes.userProfilePicture + rankedResult.user.image : 'https://goo.gl/o7tDYJ'}}">
+        </ion-avatar>
+        {{rankedResult.user.firstname ? rankedResult.user.firstname : ''}}
+        {{rankedResult.user.lastname ? rankedResult.user.lastname : ''}}
+        <h3 item-end>{{rankedResult.time.toFixed(2)}} Hours</h3>
+      </ion-item>
+    </div>
   </ion-list>
 </ion-content>
 
