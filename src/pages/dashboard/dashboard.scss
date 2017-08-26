@@ -25,6 +25,18 @@ page-dashboard {
         background-color: #4f7387 !important;
         color: #FFF !important;
       }
+
+      .item-inner {
+        border-bottom: 1px solid #1B3542 !important;
+      }
+    }
+
+    ion-list-header {
+      background-color: #344E5D !important;
+      color: #FFF !important;
+      margin-bottom: 0 !important;
+      border-bottom: 1px solid #1B3542 !important;
+      border-top: none !important;
     }
   }
 }

@@ -20,6 +20,8 @@ export class DashboardPage {
   userTotalDistanceOfPickups: number = 0;
   userTotalTimeOfPickups: number = 0;
   statSelection = this.apiProvider.statSelectionEnum.week;
+  rankingSelection = this.apiProvider.rankingSelectionEnum.pickups;
+  rankedNumberUsers: Array<any> = [];
 
   constructor(
     public navCtrl: NavController, 
@@ -41,6 +43,10 @@ export class DashboardPage {
           this.userNumberOfPickups = data.result.count;
           this.userTotalDistanceOfPickups = data.result.totalDistance;
           this.userTotalTimeOfPickups = data.result.totalTime;
+        });
+        this.apiProvider.getRankedNumberUsers().then(data => {
+          this.rankedNumberUsers = data;
+          console.log(this.rankedNumberUsers)
         });
       }
     }, error => {

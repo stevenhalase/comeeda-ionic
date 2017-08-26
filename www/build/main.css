@@ -25363,6 +25363,18 @@ page-dashboard ion-content ion-item button {
   color: #FFF !important;
 }
 
+page-dashboard ion-content ion-item .item-inner {
+  border-bottom: 1px solid #1B3542 !important;
+}
+
+page-dashboard ion-content ion-list-header {
+  background-color: #344E5D !important;
+  color: #FFF !important;
+  margin-bottom: 0 !important;
+  border-bottom: 1px solid #1B3542 !important;
+  border-top: none !important;
+}
+
 page-pickup-list ion-navbar ion-buttons button {
   color: #FFF !important;
 }

@@ -16,18 +16,22 @@ export class ApiProvider {
     month: 'Month',
     year: 'Year'
   }
+  rankingSelectionEnum = {
+    pickups: 'Pickups'
+  }
 
   constructor(public http: Http,
     private transfer: FileTransfer, 
     private file: File) {
-    // this.apiRoot = 'http://localhost:4000/api/';
-    this.apiRoot = 'https://comeeda-api.herokuapp.com/api/';
+    this.apiRoot = 'http://localhost:4000/api/';
+    // this.apiRoot = 'https://comeeda-api.herokuapp.com/api/';
 
     this.apiRoutes = {
       userLogin: this.apiRoot + 'users/login',
       userSignup: this.apiRoot + 'users',
       userUpdate: this.apiRoot + 'users/',
       userPickups: this.apiRoot + 'pickups/user/',
+      rankedNumberUsers: this.apiRoot + 'users/rankings/pickups',
       userNumberOfPickups: this.apiRoot + 'pickups/user/number/',
       userTotalDistanceOfPickups: this.apiRoot + 'pickups/user/distance/',
       userTotalTimeOfPickups: this.apiRoot + 'pickups/user/time/',
@@ -54,6 +58,14 @@ export class ApiProvider {
       url += '/?frame=' + frame;
     }
     let promise = this.http.get(url)
+      .map((res: any) => res.json())
+      .toPromise();
+
+    return promise;
+  }
+
+  getRankedNumberUsers(): Promise<any> {
+    let promise = this.http.get(this.apiRoutes.rankedNumberUsers)
       .map((res: any) => res.json())
       .toPromise();
 
@@ -130,4 +142,5 @@ class ApiRoutes {
   userStats: string;
   pickupStaticMap: string;
   userProfilePicture: string;
+  rankedNumberUsers: string;
 }

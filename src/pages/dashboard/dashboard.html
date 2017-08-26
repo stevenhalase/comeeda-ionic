@@ -41,6 +41,32 @@
       <button ion-button full clear (click)="presentPickupList()">View</button>
     </ion-item>
   </ion-list>
+
+  <div padding>
+    <ion-segment [(ngModel)]="rankingSelection">
+      <ion-segment-button value="Pickups">
+        Pickups
+      </ion-segment-button>
+      <ion-segment-button value="Time On Pickups">
+        Time On Pickups
+      </ion-segment-button>
+      <ion-segment-button value="Rating">
+        Rating
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <ion-list padding>
+    <ion-list-header>
+      Volunteer Rankings
+    </ion-list-header>
+    <ion-item *ngFor="let rankedResult of rankedNumberUsers; let i = index">
+      <ion-avatar item-start>
+        <img src="{{rankedResult.user.image ? apiProvider.apiRoutes.userProfilePicture + rankedResult.user.image : 'https://goo.gl/o7tDYJ'}}">
+      </ion-avatar>
+      {{rankedResult.user.firstname ? rankedResult.user.firstname : 'Something'}}
+      <h3 item-end>{{rankedResult.count}}</h3>
+    </ion-item>
+  </ion-list>
 </ion-content>
 
 
