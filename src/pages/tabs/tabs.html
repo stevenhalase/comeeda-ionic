@@ -1,3 +1,29 @@
 <ion-tabs>
   <ion-tab *ngFor="let tab of tabs" [root]="tab.root" [tabTitle]="tab.title" [tabIcon]="tab.icon"></ion-tab>
 </ion-tabs>
+<ion-fab right bottom>
+    <div class="chat-container" [ngClass]="{'chat-open': chatOpen}">  
+   <!-- <div class="chat-container chat-open">  -->
+    <div class="message-container">
+      <ul>
+         <li class="message" *ngFor="let message of messages" [ngClass]="{'message-incoming': message.incoming, 'sent': message.sentConfirmed, 'received': message.receivedConfirmed}">
+          <img src="{{connectedChatUser.image ? apiProvider.apiRoutes.userProfilePicture + connectedChatUser.image : 'https://goo.gl/o7tDYJ'}}">
+          <div>{{message.message.messageContent}}</div>
+        </li>  
+        <!-- <li class="message message-incoming">
+          <img src="{{connectedChatUser.image ? apiProvider.apiRoutes.userProfilePicture + connectedChatUser.image : 'https://goo.gl/o7tDYJ'}}">
+          <div>It's going pretty good</div>
+        </li> -->
+      </ul>
+    </div>
+    <div class="chat-bottom">
+      <ion-input class="chat-input" type="text" placeholder="Type something..." [(ngModel)]="userMessage"></ion-input>
+      <button ion-button clear (click)="sendMessage()">Send</button>
+    </div>
+  </div>
+   <!-- <button ion-fab ><ion-icon name="chatbubbles"></ion-icon><span class="unread-count" *ngIf="unreadCount > 0">{{unreadCount}}</span></button>   -->
+    <button ion-fab *ngIf="chatConnected" (click)="toggleChat()">
+      <ion-icon name="chatbubbles"></ion-icon>
+      <span class="unread-count" *ngIf="unreadCount > 0">{{unreadCount}}</span>
+    </button>   
+</ion-fab>

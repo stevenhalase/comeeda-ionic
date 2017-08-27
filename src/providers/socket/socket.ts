@@ -33,6 +33,10 @@ export class SocketProvider {
     this.socket.on('pickupCompleteDonator', () => this.pickupCompleteDonator());
     this.socket.on('pickupCompleteVolunteer', () => this.pickupCompleteVolunteer());
     this.socket.on('updateVolunteerLocationForDonator', (volLatLng: any) => this.updateVolunteerLocationForDonator(volLatLng));
+    this.socket.on('chatConnected', (user: any) => this.chatConnected(user));
+    this.socket.on('newChatMessage', (message: any, sendingUser: any) => this.newChatMessage(message, sendingUser));
+    this.socket.on('chatMessageSentConfirmation', (message: any) => this.chatMessageSentConfirmation(message));
+    this.socket.on('chatMessageReceivedConfirmation', (message: any) => this.chatMessageReceivedConfirmation(message));
   }
 
   connect() {
@@ -115,6 +119,27 @@ export class SocketProvider {
 
   pickupCompleteVolunteer() {
     this.events.publish('pickupCompleteVolunteer');
+  }
+
+  chatConnected(user) {
+    this.events.publish('chatConnected', user);
+  }
+
+  sendChatMessage(message, receivingUser) {
+    this.socket.emit('sendChatMessage', message, this.authProvider.currentUser, receivingUser);
+  }
+
+  newChatMessage(message, sendingUser) {
+    this.events.publish('newChatMessage', message);
+    this.socket.emit('chatMessageRecievedConfirmation', message, sendingUser);
+  }
+
+  chatMessageSentConfirmation(message) {
+    this.events.publish('chatMessageSentConfirmation', message);
+  }
+
+  chatMessageReceivedConfirmation(message) {
+    this.events.publish('chatMessageReceivedConfirmation', message);
   }
 
 
