@@ -1,14 +1,23 @@
 <ion-tabs>
   <ion-tab *ngFor="let tab of tabs" [root]="tab.root" [tabTitle]="tab.title" [tabIcon]="tab.icon"></ion-tab>
 </ion-tabs>
+<div class="chat-overlay" *ngIf="chatOpen" (click)="closeChat()"></div>
 <ion-fab right bottom>
-    <div class="chat-container" [ngClass]="{'chat-open': chatOpen}">  
-   <!-- <div class="chat-container chat-open">  -->
+  <div class="chat-container" [ngClass]="{'chat-open': chatOpen}">  
+  <!-- <div class="chat-container chat-open">  -->
+    <div class="chat-top">
+      <img src="{{connectedChatUser.image ? apiProvider.apiRoutes.userProfilePicture + connectedChatUser.image : 'https://goo.gl/o7tDYJ'}}">
+      <span>{{connectedChatUser.firstname}} {{connectedChatUser.lastname}}</span>
+      <button ion-button clear (click)="closeChat()">Close</button>
+    </div>
     <div class="message-container">
       <ul>
-         <li class="message" *ngFor="let message of messages" [ngClass]="{'message-incoming': message.incoming, 'sent': message.sentConfirmed, 'received': message.receivedConfirmed}">
-          <img src="{{connectedChatUser.image ? apiProvider.apiRoutes.userProfilePicture + connectedChatUser.image : 'https://goo.gl/o7tDYJ'}}">
-          <div>{{message.message.messageContent}}</div>
+         <li class="message" *ngFor="let message of messages" [ngClass]="{'message-incoming': message.incoming, 'sent': message.message.sentConfirmed, 'received': message.message.receivedConfirmed}">
+          <div class="message-date" *ngIf="message.message.showDate"><span>{{message.message.datetime | date:'medium'}}</span></div>
+          <div class="message-inner">
+            <img src="{{connectedChatUser.image ? apiProvider.apiRoutes.userProfilePicture + connectedChatUser.image : 'https://goo.gl/o7tDYJ'}}">
+            <div class="message-content" (click)="toggleDate(message)">{{message.message.messageContent}}</div>
+          </div>
         </li>  
         <!-- <li class="message message-incoming">
           <img src="{{connectedChatUser.image ? apiProvider.apiRoutes.userProfilePicture + connectedChatUser.image : 'https://goo.gl/o7tDYJ'}}">
@@ -17,12 +26,12 @@
       </ul>
     </div>
     <div class="chat-bottom">
-      <ion-input class="chat-input" type="text" placeholder="Type something..." [(ngModel)]="userMessage"></ion-input>
+      <ion-input class="chat-input" type="text" placeholder="Type something..." [(ngModel)]="userMessage" (keyup.enter)="sendMessage()"></ion-input>
       <button ion-button clear (click)="sendMessage()">Send</button>
     </div>
   </div>
    <!-- <button ion-fab ><ion-icon name="chatbubbles"></ion-icon><span class="unread-count" *ngIf="unreadCount > 0">{{unreadCount}}</span></button>   -->
-    <button ion-fab *ngIf="chatConnected" (click)="toggleChat()">
+    <button ion-fab *ngIf="chatConnected && !chatOpen" (click)="toggleChat()">
       <ion-icon name="chatbubbles"></ion-icon>
       <span class="unread-count" *ngIf="unreadCount > 0">{{unreadCount}}</span>
     </button>   

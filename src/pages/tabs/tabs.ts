@@ -6,7 +6,10 @@ import { ServicePage } from '../service/service';
 import { SettingsPage } from '../settings/settings';
 
 import { AuthProvider } from '../../providers/auth/auth';
+import { ApiProvider } from '../../providers/api/api';
 import { SocketProvider } from '../../providers/socket/socket';
+
+declare var $;
 
 @Component({
   selector: 'page-tabs',
@@ -25,6 +28,7 @@ export class TabsPage {
   constructor(
     public events: Events,
     public authProvider: AuthProvider,
+    public apiProvider: ApiProvider,
     public socketProvider: SocketProvider) {
       this.tabs = [
         { title: "Dashboard", root: DashboardPage, icon: "home" },
@@ -45,19 +49,17 @@ export class TabsPage {
       });
 
       this.events.subscribe('chatMessageSentConfirmation', message => {
-        let localMessage;
         for (let el of this.messages) {
           if (el.message.id == message.id) {
-            el.sentConfirmed = true;
+            el.message.sentConfirmed = true;
           }
         }
       });
 
       this.events.subscribe('chatMessageReceivedConfirmation', message => {
-        let localMessage;
         for (let el of this.messages) {
           if (el.message.id == message.id) {
-            el.receivedConfirmed = true;
+            el.message.receivedConfirmed = true;
           }
         }
       });
@@ -67,9 +69,14 @@ export class TabsPage {
     if (!this.chatOpen) {
       this.unreadCount = 0;
       this.chatOpen = true;
+      $(".message-container").stop().animate({ scrollTop: $(".message-container")[0].scrollHeight}, 1000);
     } else {
       this.chatOpen = false;
     }
+  }
+
+  closeChat() {
+    this.chatOpen = false;
   }
 
   sendMessage() {
@@ -77,8 +84,10 @@ export class TabsPage {
         let completeMessage = {
         messageContent: this.userMessage,
         id: this.guid(),
+        datetime: new Date(),
         sentConfirmed: false,
-        receivedConfirmed: false
+        receivedConfirmed: false,
+        showDate: false
       }
       this.addMessage(completeMessage, false);
       this.socketProvider.sendChatMessage(completeMessage, this.connectedChatUser);
@@ -91,10 +100,11 @@ export class TabsPage {
       message: message,
       incoming: incoming
     });
+    $(".message-container").stop().animate({ scrollTop: $(".message-container")[0].scrollHeight}, 1000);
   }
 
-  findMessage(el) {
-
+  toggleDate(message) {
+    message.message.showDate ? message.message.showDate = false : message.message.showDate = true;
   }
 
   guid() {
