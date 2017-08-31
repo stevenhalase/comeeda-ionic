@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/
     docker:
       - image: node:7
     branches:
