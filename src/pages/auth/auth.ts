@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, ToastController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, ViewController, ToastController, LoadingController } from 'ionic-angular';
 import { Geolocation } from '@ionic-native/geolocation';
 
 import { AuthProvider } from '../../providers/auth/auth';
@@ -8,7 +8,7 @@ import { SocketProvider } from '../../providers/socket/socket';
 @IonicPage()
 @Component({
   selector: 'page-auth',
-  templateUrl: 'auth.html',
+  templateUrl: './auth.html',
 })
 export class AuthPage {
 
@@ -19,8 +19,7 @@ export class AuthPage {
   location: any;
 
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
+    public navCtrl: NavController,
     public authProvider: AuthProvider, 
     public viewCtrl: ViewController, 
     private geolocation: Geolocation,

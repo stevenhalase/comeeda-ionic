@@ -1,0 +1,12 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/
+    docker:
+      - image: node:7
+    branches:
+      only:
+        - master
+    steps:
+      - checkout
+      -run: npm test
