@@ -11,7 +11,7 @@
     "ionic:build": "ionic-app-scripts build",
     "ionic:serve": "ionic-app-scripts serve",
     "test-coverage": "ng test --code-coverage",
-    "test": "ng test"
+    "test": "ng test --watch=false"
   },
   "dependencies": {
     "@angular/common": "^4.1.3",
