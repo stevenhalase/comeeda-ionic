@@ -3,6 +3,9 @@ jobs:
   build:
     docker:
       - image: node:7
+      - image: circleci/node:6-browsers
+    environment:
+        CHROME_BIN: "/usr/bin/google-chrome"
     branches:
       only:
         - master
