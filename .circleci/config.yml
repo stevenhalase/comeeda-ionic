@@ -8,4 +8,4 @@ jobs:
         - master
     steps:
       - checkout
-      - run: npm test
+      - run: npm install npm test
